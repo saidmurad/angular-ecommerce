@@ -29,9 +29,12 @@ export class ProductListComponent implements OnInit {
       // get id param string. convert to number using +
       // @ts-ignore: Object is possibly 'null'.
       this.currentCategoryId = +this.route.snapshot.paramMap.get('id');
+    } else {
+      // default value 1
+      this.currentCategoryId = 1;
     }
 
-    this.productService.getProductList().subscribe(
+    this.productService.getProductList(this.currentCategoryId).subscribe(
       data => {
         this.products = data;
       }
