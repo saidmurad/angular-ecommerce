@@ -17,7 +17,7 @@ export class ProductListComponent implements OnInit {
 
   //properties for pagination
   thePageNumber: number = 1;
-  thepageSize: number = 10;
+  thePageSize: number = 10;
   theTotalElements: number = 0;
  
 
@@ -73,8 +73,8 @@ export class ProductListComponent implements OnInit {
 
     this.previousCategoryId = this.currentCategoryId;
 
-    this.productService.getProductListPaginate(this.thePageNumber,
-                                              this.thepageSize,
+    this.productService.getProductListPaginate(this.thePageNumber - 1,
+                                              this.thePageSize,
                                               this.currentCategoryId)
                                               .subscribe(this.processResult());
   }
@@ -83,7 +83,7 @@ export class ProductListComponent implements OnInit {
     return (data: any) => {
       this.products = data._embedded.products;
       this.thePageNumber = data.page.number + 1;
-      this.thepageSize = data.page.size;
+      this.thePageSize = data.page.size;
       this.theTotalElements = data.page.totalElements;
     };
   }
